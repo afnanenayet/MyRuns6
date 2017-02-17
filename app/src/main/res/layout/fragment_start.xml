@@ -1,0 +1,80 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.afnanenayet.afnan_enayet_myruns6.StartFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/activity_type_tv"
+            android:layout_below="@+id/activityTypeSpinner"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/start_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/start_string" />
+
+            <Button
+                android:id="@+id/sync_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sync_string"
+ />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/activity_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/inputTypeSpinner"
+            android:layout_margin="5dp"
+            android:text="@string/activity_type_title" />
+
+        <Spinner
+            android:id="@+id/inputTypeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/input_type_tv"
+            android:layout_margin="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <Spinner
+            android:id="@+id/activityTypeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/activity_type_tv"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/input_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/inputTypeSpinner"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="@string/input_type_title" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

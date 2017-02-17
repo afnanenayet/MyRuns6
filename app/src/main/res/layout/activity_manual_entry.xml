@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_manual_entry"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.afnanenayet.afnan_enayet_myruns6.ManualEntryActivity">
+
+    <ListView
+        android:id="@+id/manual_entry_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/manual_entry_button_container"
+        android:layout_alignParentTop="true" />
+
+    <android.support.v7.widget.ButtonBarLayout
+        android:id="@+id/manual_entry_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/manual_entry_save"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save_button_text" />
+
+        <Button
+            android:id="@+id/manual_entry_cancel"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:textAlignment="center" />
+    </android.support.v7.widget.ButtonBarLayout>
+</RelativeLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/account_prefs_title">
+
+        <Preference
+            android:title="@string/pref_profile_title"
+            android:summary="@string/pref_profile_summary"
+            android:key="@string/pref_profile_key" />
+
+        <CheckBoxPreference
+            android:key="pref_privacy_settings"
+            android:title="@string/privacy_settings_title"
+            android:summary="@string/privacy_settings_summary"
+            android:defaultValue="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/additional_settings_prefs_title">
+
+        <ListPreference
+            android:key="@string/pref_unit_preference_key"
+            android:title="@string/unit_pref_title"
+            android:summary="@string/unit_pref_summary"
+            android:entries="@array/unit_preference_list"
+            android:entryValues="@array/unit_preference_values"
+            android:negativeButtonText="@string/cancel" />
+
+        <EditTextPreference
+            android:key="@string/pref_comments_key"
+            android:title="@string/pref_comments_title"
+            android:summary="@string/pref_comments_summary"
+            android:positiveButtonText="@string/ok"
+            android:negativeButtonText="@string/cancel"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_misc_title">
+        <Preference
+            android:key="@string/pref_webpage_key"
+            android:title="@string/pref_webpage_title"
+            android:summary="@string/pref_webpage_summary"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>
