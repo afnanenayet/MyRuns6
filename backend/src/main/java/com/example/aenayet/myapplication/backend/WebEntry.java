@@ -1,24 +1,44 @@
-package com.afnanenayet.afnan_enayet_myruns6;
+package com.example.aenayet.myapplication.backend;
 
-import android.location.Location;
+/**
+ * Created by aenayet on 2/19/17.
+ */
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * Created by Afnan Enayet on 1/25/17.
+ * A model for an Entry class that can be represented in AppEngine
+ * This means that all fields are serializable
  */
+public class WebEntry {
+    /******************************* Strings for Datastore **************************************/
+    public final static String ENTRY_ENTITY_KIND = "entry";
+    public final static String PARENT_KIND = "device_identifier";
+    public final static String PARENT_IDENTIFIER = "parent_id";
 
-/**
- * Object to represent database entry with applicable properties
- */
-public class Entry {
-    /** Internal strings for Entry properties **/
+    // Property strings for entry
+    final class Properties {
+        final static String idColumn = "_id";
+        final static String inputTypeColumn = "input_type";
+        final static String dateTimeColumn = "date_time";
+        final static String activityTypeColumn = "activity_type";
+        final static String durationColumn = "duration";
+        final static String distanceColumn = "distance";
+        final static String avgSpeedColumn = "avg_speed";
+        final static String caloriesColumn = "calories";
+        final static String climbColumn = "climb";
+        final static String heartRateColumn = "heart_rate";
+        final static String commentColumn = "comment";
+
+        // Private constructor to prevent initialization
+        private Properties() { }
+    }
+
     private long id; // ID
-    private int inputType; // Input type (auto, manual, etc)
-    private int activityType; // Activity type (running, walking, etc)
-    private Calendar dateTime; // Date and time
-    private long duration; // Duration of activity
+    private String inputType; // Input type (auto, manual, etc)
+    private String activityType; // Activity type (running, walking, etc)
+    private String dateTime; // Date and time
+    private String duration; // Duration of activity
     private float distance; // Distance of activity
     private float avgPace; // Average pace
     private int calories;  // Calories
@@ -26,39 +46,37 @@ public class Entry {
     private float avgSpeed; // Average speed
     private float climb; // Total climb
     private String comments; // Comments
-    private int privacy; // Privacy
-    private ArrayList<Location> locations; // List of locations
 
     // Getters and setters
-    public long getId() {
+    long getId() {
         return this.id;
     }
 
-    public void setId(long idToSet) {
+    void setId(long idToSet) {
         this.id = idToSet;
     }
 
-    int getInputType() {
+    String getInputType() {
         return this.inputType;
     }
 
-    void setInputType(int inputTypeToSet) {
+    void setInputType(String inputTypeToSet) {
         this.inputType = inputTypeToSet;
     }
 
-    Calendar getDateTime() {
+    String getDateTime() {
         return this.dateTime;
     }
 
-    void setDateTime(Calendar dateTimeToSet) {
+    void setDateTime(String dateTimeToSet) {
         this.dateTime = dateTimeToSet;
     }
 
-    long getDuration() {
+    String getDuration() {
         return this.duration;
     }
 
-    void setDuration(long durationToSet) {
+    void setDuration(String durationToSet) {
         this.duration = durationToSet;
     }
 
@@ -138,27 +156,12 @@ public class Entry {
         this.comments = commentsToSet;
     }
 
-    int getActivityType() {
+    String getActivityType() {
         return this.activityType;
     }
 
-    void setActivityType(int activityTypeToSet) {
+    void setActivityType(String activityTypeToSet) {
         this.activityType = activityTypeToSet;
     }
 
-    int getPrivacy() {
-        return this.privacy;
-    }
-
-    void setPrivacy(int privacyToSet) {
-        this.privacy = privacyToSet;
-    }
-
-    ArrayList<Location> getLocations() {
-        return this.locations;
-    }
-
-    void setLocations(ArrayList<Location> locationsToSet) {
-        this.locations = locationsToSet;
-    }
 }

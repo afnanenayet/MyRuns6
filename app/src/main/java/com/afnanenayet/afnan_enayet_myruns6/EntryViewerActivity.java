@@ -13,8 +13,11 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EntryViewerActivity extends AppCompatActivity {
     public static final String ID_KEY = "id_key";
@@ -75,6 +78,9 @@ public class EntryViewerActivity extends AppCompatActivity {
         return dbHelper.fetchEntryByIndex(id);
     }
 
+    /**
+     * Wrapper for DeleteEntryThread
+     */
     private void deleteEntry() {
         new DeleteEntryThread().execute(entryId);
         this.finish();
@@ -149,8 +155,22 @@ public class EntryViewerActivity extends AppCompatActivity {
     private class DeleteEntryThread extends AsyncTask<Long, Void, Void> {
         @Override
         protected Void doInBackground(Long... id) {
+            // Remove entry from internal database
             DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
             helper.removeEntry(id[0]);
+            helper.close();
+
+            // Remove entry from server
+            Map<String, String> map = new HashMap<>();
+            map.put(EntryDataSource.ActivityEntry.idColumn, Long.toString(id[0]));
+
+            try {
+                ServerUtilities.post(ServerUtilities.SERVER_ADDRESS + "/delete.do", map);
+            } catch (IOException e) {
+                Log.e(DEBUG_TAG, "Failed to post entry delete request to server");
+                e.printStackTrace();
+            }
+
             return null;
         }
     }
@@ -165,10 +185,6 @@ public class EntryViewerActivity extends AppCompatActivity {
             Entry entryToDisplay = getEntryById(id[0]);
             displayEntryDetails(entryToDisplay);
             return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void param) {
         }
     }
 }

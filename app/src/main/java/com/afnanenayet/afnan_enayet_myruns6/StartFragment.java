@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +20,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StartFragment extends Fragment implements View.OnClickListener,
         AdapterView.OnItemSelectedListener {
@@ -143,8 +152,7 @@ public class StartFragment extends Fragment implements View.OnClickListener,
         switch (v.getId()) {
             case R.id.sync_button:
                 Log.d(DEBUG_TAG, "Sync button clicked");
-
-                // TODO: implement when necessary
+                new PostEntriesTask().execute();
                 break;
 
             case R.id.start_button:
@@ -228,5 +236,51 @@ public class StartFragment extends Fragment implements View.OnClickListener,
     public void onNothingSelected(AdapterView<?> adapterView) {
         // Do nothing if nothing is selected
         // callback method must be implemented, however
+    }
+
+    /**
+     * Posts entries using server utility. Converts each entry to JSON then sends to server one
+     * at a time so we don't create a request that's too large for HTTP to handle
+     */
+    class PostEntriesTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
+            ArrayList<Entry> entries = databaseHelper.fetchEntries();
+            databaseHelper.close();
+
+            // Delete all entries
+            try {
+                Map<String, String> map = new HashMap<>();
+                map.put(EntryDataSource.ActivityEntry.idColumn, "-1");
+                ServerUtilities.post(ServerUtilities.SERVER_ADDRESS + "/delete.do", map);
+            } catch (IOException e) {
+                Log.e(DEBUG_TAG, "Failed to post delete request to server");
+            }
+
+            // Sending each entry via POST to server
+            for (Entry entry : entries) {
+                JSONObject jsonObject = ServerUtilities.entryToJson(getActivity(), entry);
+                String jsonString = jsonObject.toString();
+
+                Log.d("JSON", jsonString);
+
+                try {
+                    Log.d(DEBUG_TAG, "POSTing JSON string to server");
+                    ServerUtilities.post(ServerUtilities.SERVER_ADDRESS + "/insert.do", jsonString);
+                } catch (IOException e) {
+                    Log.e(DEBUG_TAG, "Failed to post entry to database");
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        // Notifies user that entries have been synced
+        protected void onPostExecute(Void... params) {
+            // Notifying user that entries have been sync'd
+            Toast.makeText(getActivity(), "Entries synced", Toast.LENGTH_SHORT).show();
+        }
     }
 }

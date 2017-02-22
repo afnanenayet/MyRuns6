@@ -66,6 +66,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME,
                 EntryDataSource.ActivityEntry.idColumn + "=" + rowIndex,
                 null);
+        Log.d(DEBUG_TAG, "Deleting entry " + rowIndex + " in db helper");
     }
 
     /**

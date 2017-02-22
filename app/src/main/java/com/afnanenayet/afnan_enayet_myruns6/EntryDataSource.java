@@ -40,6 +40,7 @@ final class EntryDataSource {
             ActivityEntry.privacyColumn,
             ActivityEntry.gpsDataColumn
     };
+
     private final static String DEBUG_TAG = "EntryDS";
 
     // Keeping constructor private so no instances of this class can be generated

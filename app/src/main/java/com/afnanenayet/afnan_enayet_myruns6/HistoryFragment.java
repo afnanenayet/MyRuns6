@@ -26,6 +26,15 @@ public class HistoryFragment extends Fragment implements AdapterView.OnItemClick
     private ArrayList<Entry> entries;
     private ArrayList<String[]> titleEntries;
     private ListView listView;
+    static HistoryFragment currentInstance = null;
+
+    /**
+     * Returns an instance of this class
+     * @return an instance of this class
+     */
+    public static HistoryFragment getInstance() {
+        return currentInstance;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +49,8 @@ public class HistoryFragment extends Fragment implements AdapterView.OnItemClick
 
         // Loading entries
         updateEntries();
+
+        currentInstance = this;
         return rootView;
     }
 
@@ -72,7 +83,7 @@ public class HistoryFragment extends Fragment implements AdapterView.OnItemClick
     /**
      * Updates entries asynchronously, wrapper for the AsyncTask
      */
-    private void updateEntries() {
+    public void updateEntries() {
         Log.d(DEBUG_TAG, "Updating entries");
         new HistoryLoader().execute();
     }
@@ -208,7 +219,7 @@ public class HistoryFragment extends Fragment implements AdapterView.OnItemClick
     /**
      * Asynchronously loads the tasks needed to display the data in the fragment
      */
-    private final class HistoryLoader extends AsyncTask<Void, Void, Void> {
+    public final class HistoryLoader extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {

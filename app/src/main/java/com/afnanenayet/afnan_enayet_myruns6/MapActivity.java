@@ -32,7 +32,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Displays location and activity statistics on a map fragment. Uses an external service to record
@@ -520,9 +523,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
      * @param id the ID/row column that the entry data is held in
      */
     private void deleteEntry(Long id) {
+        // Delete entry from database
         DatabaseHelper db = new DatabaseHelper(this);
         db.removeEntry(id);
         db.close();
+
+        // Delete entry from server
+        Map<String, String> map = new HashMap<>();
+        map.put(EntryDataSource.ActivityEntry.idColumn, Long.toString(id));
+
+        try {
+            ServerUtilities.post(ServerUtilities.SERVER_ADDRESS + "/delete.do", map);
+        } catch (IOException e) {
+            Log.e(DEBUG_TAG, "Failed to post delete request to server");
+            e.printStackTrace();
+        }
     }
 
     /**

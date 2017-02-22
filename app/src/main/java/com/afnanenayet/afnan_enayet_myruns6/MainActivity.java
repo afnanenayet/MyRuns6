@@ -6,6 +6,11 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+
+import com.afnanenayet.afnan_enayet_myruns6.HistoryFragment;
+import com.afnanenayet.afnan_enayet_myruns6.SettingsFragment;
+import com.afnanenayet.afnan_enayet_myruns6.StartFragment;
 
 import java.util.ArrayList;
 
@@ -19,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
      */
 
     private MyRunsFragmentPageAdapter pagerAdapter;
+    private static final String DEBUG_TAG = "MainActivity";
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -50,5 +56,10 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        // Registering with GCM
+        Log.d(DEBUG_TAG, "Attempting to register with GCM");
+        GcmRegistrationAsync regTask = new GcmRegistrationAsync(this);
+        regTask.execute();
     }
 }
