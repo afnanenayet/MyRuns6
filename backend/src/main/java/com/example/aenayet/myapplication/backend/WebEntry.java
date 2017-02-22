@@ -4,8 +4,6 @@ package com.example.aenayet.myapplication.backend;
  * Created by aenayet on 2/19/17.
  */
 
-import java.util.Calendar;
-
 /**
  * A model for an Entry class that can be represented in AppEngine
  * This means that all fields are serializable

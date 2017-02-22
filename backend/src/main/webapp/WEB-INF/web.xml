@@ -24,15 +24,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>query</servlet-name>
-        <servlet-class>com.example.aenayet.myapplication.backend.QueryServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>query</servlet-name>
-        <url-pattern>/query.do</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>delete</servlet-name>
         <servlet-class>com.example.aenayet.myapplication.backend.DeleteServlet</servlet-class>
     </servlet>

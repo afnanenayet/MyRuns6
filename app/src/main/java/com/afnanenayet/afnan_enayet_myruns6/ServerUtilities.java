@@ -29,10 +29,7 @@ import javax.sql.DataSource;
  */
 public final class ServerUtilities {
 
-    // public static final String SERVER_ADDRESS = "https://myruns-1486240948224.appspot.com";
-    public static final String SERVER_ADDRESS = "http://127.0.0.1:8080";
-    public static final String SERVER_ID_KEY = "server_entry_id_key";
-    public static final String SENDER_ID_API = "526923652751";
+    public static final String SERVER_ADDRESS = "https://myruns-1486240948224.appspot.com";
     public static final String ENTRY_REQUEST_KEY = "json_string";
 
     private static final String DEBUG_TAG = "ServerUtil";

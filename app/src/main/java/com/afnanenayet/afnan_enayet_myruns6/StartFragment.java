@@ -242,10 +242,9 @@ public class StartFragment extends Fragment implements View.OnClickListener,
      * Posts entries using server utility. Converts each entry to JSON then sends to server one
      * at a time so we don't create a request that's too large for HTTP to handle
      */
-    class PostEntriesTask extends AsyncTask<Void, Void, Void> {
+    class PostEntriesTask extends AsyncTask<Void, Void, Integer> {
 
-        @Override
-        protected Void doInBackground(Void... voids) {
+        protected Integer doInBackground(Void... voids) {
             DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
             ArrayList<Entry> entries = databaseHelper.fetchEntries();
             databaseHelper.close();
@@ -274,11 +273,14 @@ public class StartFragment extends Fragment implements View.OnClickListener,
                     e.printStackTrace();
                 }
             }
-            return null;
+            return 1;
         }
 
         // Notifies user that entries have been synced
-        protected void onPostExecute(Void... params) {
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
             // Notifying user that entries have been sync'd
             Toast.makeText(getActivity(), "Entries synced", Toast.LENGTH_SHORT).show();
         }
