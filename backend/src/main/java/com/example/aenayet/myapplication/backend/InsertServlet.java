@@ -17,22 +17,18 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 public class InsertServlet extends HttpServlet {
-    Logger logger = Logger.getLogger(WebEntry.class.getName());
+    private Logger logger = Logger.getLogger(WebEntry.class.getName());
 
     /**
      * Inserts an Entry from a JSON object
      */
     @Override
     public void doGet(HttpServletRequest httpServletRequest,
-                      HttpServletResponse httpServletResponse) {
+                      HttpServletResponse httpServletResponse)
+            throws IOException, ServletException{
         // Insertions are done through post, forward request
-        try {
-            doPost(httpServletRequest, httpServletResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        doPost(httpServletRequest, httpServletResponse);
     }
-
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws

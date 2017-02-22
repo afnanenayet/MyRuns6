@@ -8,11 +8,11 @@ package com.example.aenayet.myapplication.backend;
  * A model for an Entry class that can be represented in AppEngine
  * This means that all fields are serializable
  */
-public class WebEntry {
+ class WebEntry {
     /******************************* Strings for Datastore **************************************/
-    public final static String ENTRY_ENTITY_KIND = "entry";
-    public final static String PARENT_KIND = "device_identifier";
-    public final static String PARENT_IDENTIFIER = "parent_id";
+     final static String ENTRY_ENTITY_KIND = "entry";
+     final static String PARENT_KIND = "device_identifier";
+     final static String PARENT_IDENTIFIER = "parent_id";
 
     // Property strings for entry
     final class Properties {

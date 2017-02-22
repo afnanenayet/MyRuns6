@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet that serves the HTML app engine
  */
 public class MyRunsAppEngineServlet extends HttpServlet {
+
+    // Serves webpage with all Entry data
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException{

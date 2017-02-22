@@ -141,7 +141,7 @@ public class EntryDatastore {
      * @param id the id entry to delete
      * @return whether the entry was able to be deleted
      */
-    public boolean deleteEntry(Long id) {
+     boolean deleteEntry(Long id) {
         // Preparing query to find entry to delete
         Query.Filter filter = new Query.FilterPredicate(WebEntry.Properties.idColumn,
                 Query.FilterOperator.EQUAL, id);
@@ -164,7 +164,7 @@ public class EntryDatastore {
     /**
      * Deletes every entry in the datastore
      */
-    public void deleteAllEntries() {
+     void deleteAllEntries() {
         // Preparing query to find entry to delete
         Query query = new Query(WebEntry.ENTRY_ENTITY_KIND);
         query.setAncestor(getParentKey());
@@ -182,7 +182,7 @@ public class EntryDatastore {
      * @param id the ID of a query. Set -1 if you want to query all Entries
      * @return A list of entries which match the parameters of the query
      */
-    public ArrayList<WebEntry> query(Long id) {
+     ArrayList<WebEntry> query(Long id) {
         ArrayList<WebEntry> list = new ArrayList<>();
 
         // Query all
